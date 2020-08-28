@@ -4,25 +4,26 @@
 
 HADOOP_26_VERSION = 2.6.5
 HADOOP_27_VERSION = 2.7.3
-PROTOBUF_VERSION = 2.5.0
+HADOOP_32_VERSION = 3.2.1
+PROTOBUF_VERSION = 3.13.0
 
 DOCKER = docker
-DOCKER_REPO = danisla/hadoop
+DOCKER_REPO = registry.cn-hangzhou.aliyuncs.com/fzn0268-pub/hadoop
 
 all: build
 
-### Build hadoop 2.6 and 2.7 images with native libs.
-build: build-$(HADOOP_26_VERSION) build-$(HADOOP_27_VERSION)
+### Build hadoop 3.2 images with native libs.
+build: build-$(HADOOP_32_VERSION)
 build-%: hadoop-native-%.tar
 	$(DOCKER) build -t hadoop:$* \
 	--build-arg HADOOP_VERSION=$* \
 	.
 
-tag: tag-$(HADOOP_26_VERSION) tag-$(HADOOP_27_VERSION)
+tag: tag-$(HADOOP_32_VERSION)
 tag-%:
 	$(DOCKER) tag hadoop:$* $(DOCKER_REPO):$*
 
-push: push-$(HADOOP_26_VERSION) push-$(HADOOP_27_VERSION)
+push: push-$(HADOOP_32_VERSION)
 push-%:
 	$(DOCKER) push $(DOCKER_REPO):$*
 

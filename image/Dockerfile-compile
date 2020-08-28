@@ -1,6 +1,6 @@
-FROM java:openjdk-8-jdk
+FROM adoptopenjdk/openjdk8-openj9:latest
 
-ENV MAVEN_VERSION 3.3.9
+ENV MAVEN_VERSION 3.6.3
 
 RUN mkdir -p /usr/share/maven \
   && curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
@@ -12,6 +12,7 @@ ENV MAVEN_HOME /usr/share/maven
 VOLUME /root/.m2
 
 RUN \
+  sed -i 's|(archive|security)\.ubuntu\.com|mirrors\.tuna\.tsinghua\.edu\.cn|g' /etc/apt/sources.list
   apt-get update && \
   apt-get install -y build-essential cmake zlib1g-dev pkg-config libssl-dev && \
   apt-get clean && \

@@ -1,4 +1,4 @@
-FROM java:8-jre
+FROM adoptopenjdk/openjdk8-openj9:jre
 
 # Add native libs
 ARG HADOOP_VERSION=
@@ -21,10 +21,37 @@ RUN \
 WORKDIR $HADOOP_PREFIX
 
 # Hdfs ports
-EXPOSE 50010 50020 50070 50075 50090 8020 9000
+# port of dfs.datanode.address
+EXPOSE 9866 \
+# port of dfs.datanode.ipc.address
+       9867 \
+# port of dfs.namenode.http-address
+       9870 \
+# port of dfs.datanode.http.address
+       9864 \
+# port of dfs.namenode.secondary.http-address
+       9868 \
+# port of dfs.namenode.rpc-address
+       8020 \
+# port of fs.defaultFS, in core-site.xml
+       9000
 # Mapred ports
+# port of mapreduce.jobhistory.webapp.address
 EXPOSE 19888
-#Yarn ports
-EXPOSE 8030 8031 8032 8033 8040 8042 8088
-#Other ports
+# Yarn ports
+# port of yarn.resourcemanager.scheduler.address
+EXPOSE 8030 \
+# port of yarn.resourcemanager.resource-tracker.address
+       8031 \
+# port of yarn.resourcemanager.address
+       8032 \
+# port of yarn.resourcemanager.admin.address
+       8033 \
+# port of yarn.nodemanager.localizer.address
+       8040 \
+# port of yarn.nodemanager.webapp.address
+       8042 \
+# port of yarn.resourcemanager.webapp.address
+       8088
+# Other ports
 EXPOSE 49707 2122
