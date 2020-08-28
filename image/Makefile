@@ -3,7 +3,7 @@
 # Current apache hadoop releases: http://hadoop.apache.org/releases.html
 
 HADOOP_26_VERSION = 2.6.5
-HADOOP_27_VERSION = 2.7.3
+HADOOP_210_VERSION = 2.10.0
 HADOOP_32_VERSION = 3.2.1
 PROTOBUF_VERSION = 3.13.0
 
@@ -43,7 +43,7 @@ hadoop-%.tar.gz:
 
 ### Fetch protobuf source
 protobuf-%.tar.bz2:
-	curl -LO https://github.com/google/protobuf/releases/download/v$*/protobuf-$*.tar.bz2
+	curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v$*/protobuf-$*.tar.bz2
 
 # Keep intermediate downloads.
 .PRECIOUS: protobuf-%.tar.bz2 hadoop-%-src.tar.gz hadoop-%.tar.gz
