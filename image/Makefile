@@ -42,7 +42,7 @@ hadoop-%.tar.gz:
 		xargs curl -LO
 
 ### Fetch protobuf source
-protobuf-%.tar.gz:
+protobuf-java-%.tar.gz:
 	curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v$*/protobuf-java-$*.tar.gz
 
 # Keep intermediate downloads.
