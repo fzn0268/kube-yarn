@@ -16,11 +16,14 @@ spec:
   selector:
     component: hdfs-dn
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: hdfs-dn
 spec:
+  selector:
+    matchLabels:
+      component: hdfs-dn
   serviceName: "hdfs-dn"
   replicas: 1
   template:

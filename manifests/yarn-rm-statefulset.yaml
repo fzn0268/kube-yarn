@@ -30,11 +30,14 @@ spec:
   selector:
     component: yarn-rm
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: yarn-rm
 spec:
+  selector:
+    matchLabels:
+      component: yarn-rm
   serviceName: "yarn-rm"
   replicas: 1
   template:

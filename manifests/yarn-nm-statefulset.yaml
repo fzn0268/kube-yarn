@@ -17,11 +17,14 @@ spec:
   selector:
     component: yarn-nm
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: yarn-nm
 spec:
+  selector:
+    matchLabels:
+      component: yarn-nm
   serviceName: "yarn-nm"
   replicas: 2
   template:
