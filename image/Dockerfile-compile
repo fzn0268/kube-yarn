@@ -23,11 +23,11 @@ ARG PROTOBUF_VERSION=
 
 ADD \
   hadoop-${HADOOP_VERSION}-src.tar.gz \
-  protobuf-${PROTOBUF_VERSION}.tar.bz2 \
+  protobuf-java-${PROTOBUF_VERSION}.tar.gz \
   /tmp/
 
 RUN \
-  cd /tmp/protobuf-${PROTOBUF_VERSION} && \
+  cd /tmp/protobuf-java-${PROTOBUF_VERSION} && \
   ./configure && \
   make -j$(nproc) && make install
 

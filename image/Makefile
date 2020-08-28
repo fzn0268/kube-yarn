@@ -42,14 +42,14 @@ hadoop-%.tar.gz:
 		xargs curl -LO
 
 ### Fetch protobuf source
-protobuf-%.tar.bz2:
-	curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v$*/protobuf-java-$*.tar.bz2
+protobuf-%.tar.gz:
+	curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v$*/protobuf-java-$*.tar.gz
 
 # Keep intermediate downloads.
-.PRECIOUS: protobuf-%.tar.bz2 hadoop-%-src.tar.gz hadoop-%.tar.gz
+.PRECIOUS: protobuf-java-%.tar.gz hadoop-%-src.tar.gz hadoop-%.tar.gz
 
 ### Compile native libs (~10min)
-native_libs_%: hadoop-%-src.tar.gz protobuf-$(PROTOBUF_VERSION).tar.bz2
+native_libs_%: hadoop-%-src.tar.gz protobuf-java-$(PROTOBUF_VERSION).tar.gz
 	$(DOCKER) build -f Dockerfile-compile -t hadoop-nativelibs:$*\
 		--build-arg=HADOOP_VERSION=$* \
 		--build-arg=PROTOBUF_VERSION=$(PROTOBUF_VERSION) \
