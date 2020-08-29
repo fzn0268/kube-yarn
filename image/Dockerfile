@@ -15,6 +15,11 @@ ENV HADOOP_PREFIX=/usr/local/hadoop \
     PATH=${PATH}:/usr/local/hadoop/bin
 
 RUN \
+  sed -i -E -e 's/(archive|security)\.ubuntu\.com/mirrors\.tuna\.tsinghua\.edu\.cn/g' /etc/apt/sources.list && \
+  apt-get update && \
+  apt-get install -y libsasl2-2 && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   cd /usr/local && ln -s ./hadoop-${HADOOP_VERSION} hadoop && \
   rm -f ${HADOOP_PREFIX}/logs/*
 
