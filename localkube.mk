@@ -17,22 +17,22 @@
 MINIKUBE_MIN_MEM=8192
 MINIKUBE_VM_NAME=minikubeVM
 MINIKUBE_BIN=/usr/local/bin/minikube
-XHYVE_BIN=/usr/local/bin/docker-machine-driver-xhyve
+HYPERKIT_BIN=/usr/local/bin/docker-machine-driver-hyperkit
 
-$(XHYVE_BIN):
-	$(warning installing xhyve driver)
-	curl -L https://github.com/zchee/docker-machine-driver-xhyve/releases/download/v0.2.2/docker-machine-driver-xhyve > /usr/local/bin/docker-machine-driver-xhyve
-	chmod +x /usr/local/bin/docker-machine-driver-xhyve
-	sudo chown root:wheel /usr/local/bin/docker-machine-driver-xhyve
-	sudo chmod u+s /usr/local/bin/docker-machine-driver-xhyve
+$(HYPERKIT_BIN):
+	$(warning installing hyperkit driver)
+	curl -L https://github.com/kubernetes/minikube/releases/download/v0.2.2/docker-machine-driver-hyperkit > /usr/local/bin/docker-machine-driver-hyperkit
+	chmod +x /usr/local/bin/docker-machine-driver-hyperkit
+	sudo chown root:wheel /usr/local/bin/docker-machine-driver-hyperkit
+	sudo chmod u+s /usr/local/bin/docker-machine-driver-hyperkit
 
 $(MINIKUBE_BIN):
-	curl -f -L https://github.com/kubernetes/minikube/releases/download/v0.7.1/minikube-darwin-amd64 > /usr/local/bin/minikube
+	curl -f -L https://github.com/kubernetes/minikube/releases/download/v1.12.3/minikube-darwin-amd64 > /usr/local/bin/minikube
 	chmod +x /usr/local/bin/minikube
 
-minikube: $(MINIKUBE_BIN) $(XHYVE_BIN)
+minikube: $(MINIKUBE_BIN) $(HYPERKIT_BIN)
 	@NCPU=$$(sysctl -n hw.ncpu) && if [ "$$(minikube status)" == "Does Not Exist" ]; then \
-		$(MINIKUBE_BIN) start --vm-driver=xhyve --memory $(MINIKUBE_MIN_MEM) --cpus $$(sysctl -n hw.ncpu) ; \
+		$(MINIKUBE_BIN) start --vm-driver=hyperkit --memory $(MINIKUBE_MIN_MEM) --cpus $$(sysctl -n hw.ncpu) ; \
 	else \
 		eval $$(jq -r '.Driver | to_entries[] | "\(.key)=\(.value)"' $(HOME)/.minikube/machines/$(MINIKUBE_VM_NAME)/config.json | egrep 'CPU|Memory' | xargs echo export ) ; \
 		if [ "$$CPU" -ne "$$NCPU" ]; then echo "ERROR: minikube started with $$CPU cpus, expected $$NCPU, to fix, run: minikube delete && make minikube" ; exit 1 ; fi ; \

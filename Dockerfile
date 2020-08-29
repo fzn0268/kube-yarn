@@ -1,4 +1,4 @@
-FROM gcr.io/google_containers/hyperkube-amd64:v1.5.3
+FROM gcr.io/google_containers/hyperkube-amd64:v1.18.6
 
 RUN apt-get update && apt-get install -y make jq && \
     cp /kubectl /usr/local/bin/kubectl && \
