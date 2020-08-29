@@ -5,7 +5,7 @@ ARG HADOOP_VERSION=
 ADD hadoop-${HADOOP_VERSION}.tar.gz /usr/local
 ADD hadoop-native-${HADOOP_VERSION}.tar /usr/local/hadoop-${HADOOP_VERSION}/lib/native
 
-ENV HADOOP_PREFIX=/usr/local/hadoop \
+ENV HADOOP_HOME=/usr/local/hadoop \
     HADOOP_COMMON_HOME=/usr/local/hadoop \
     HADOOP_HDFS_HOME=/usr/local/hadoop \
     HADOOP_MAPRED_HOME=/usr/local/hadoop \
@@ -17,13 +17,13 @@ ENV HADOOP_PREFIX=/usr/local/hadoop \
 RUN \
   sed -i -E -e 's/(archive|security)\.ubuntu\.com/mirrors\.tuna\.tsinghua\.edu\.cn/g' /etc/apt/sources.list && \
   apt-get update && \
-  apt-get install -y libsasl2-2 && \
+  apt-get install -y libssl-dev libzstd1 zstd libsnappy1v5 libsnappy-java bzip2 fuse libisal2 libsasl2-2 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   cd /usr/local && ln -s ./hadoop-${HADOOP_VERSION} hadoop && \
-  rm -f ${HADOOP_PREFIX}/logs/*
+  rm -f ${HADOOP_HOME}/logs/*
 
-WORKDIR $HADOOP_PREFIX
+WORKDIR $HADOOP_HOME
 
 # Hdfs ports
 # port of dfs.datanode.address

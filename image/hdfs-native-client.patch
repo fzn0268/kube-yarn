@@ -1,4 +1,13 @@
-diff -uNr -x target hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/sasl_digest_md5.cc hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/sasl_digest_md5.cc
+diff -uNr hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/fuse-dfs/CMakeLists.txt hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/fuse-dfs/CMakeLists.txt
+--- hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/fuse-dfs/CMakeLists.txt	2019-09-10 22:35:49.000000000 +0800
++++ hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/fuse-dfs/CMakeLists.txt	2020-08-29 23:42:41.273739041 +0800
+@@ -89,4 +89,5 @@
+     native_mini_dfs
+     ${JAVA_JVM_LIBRARY}
+     pthread
++    ${CMAKE_DL_LIBS}
+ )
+diff -uNr hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/sasl_digest_md5.cc hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/sasl_digest_md5.cc
 --- hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/sasl_digest_md5.cc	2019-09-10 22:35:49.000000000 +0800
 +++ hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/sasl_digest_md5.cc	2020-08-28 23:29:53.218043717 +0800
 @@ -94,7 +94,7 @@
@@ -10,7 +19,7 @@ diff -uNr -x target hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-clie
      cnonce_ = Base64Encode(std::string(buf, sizeof(buf)));
    }
  }
-diff -uNr -x target hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/util.cc hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/util.cc
+diff -uNr hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/util.cc hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/util.cc
 --- hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/util.cc	2019-09-10 22:35:49.000000000 +0800
 +++ hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/util.cc	2020-08-28 23:30:05.794293608 +0800
 @@ -75,7 +75,7 @@
@@ -22,7 +31,7 @@ diff -uNr -x target hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-clie
  
    std::ostringstream oss;
    oss << "DFSClient_"  << getpid() <<  "_" <<
-diff -uNr -x target hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfs-tests/CMakeLists.txt hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfs-tests/CMakeLists.txt
+diff -uNr hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfs-tests/CMakeLists.txt hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfs-tests/CMakeLists.txt
 --- hadoop-3.2.1-src/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfs-tests/CMakeLists.txt	2019-09-10 22:35:49.000000000 +0800
 +++ hadoop-3.2.1-src_moded/hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfs-tests/CMakeLists.txt	2020-08-28 23:29:03.397089775 +0800
 @@ -37,7 +37,7 @@

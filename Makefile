@@ -71,7 +71,7 @@ create-configmap: kubectl
 	  --from-file=artifacts/bootstrap.sh \
 	  --from-file=artifacts/start-yarn-rm.sh \
 	  --from-file=artifacts/start-yarn-nm.sh \
-	  --from-file=artifacts/slaves \
+	  --from-file=artifacts/workers \
 	  --from-file=artifacts/core-site.xml \
 	  --from-file=artifacts/hdfs-site.xml \
 	  --from-file=artifacts/mapred-site.xml \

@@ -33,7 +33,7 @@ The hadoop components are boostrapped using files from a `ConfigMap` to provide 
 
 The `ACP` env var can also be set to a comma-separated list of URLs to be downloaded and added to the classpath at runtime.
 
-Logs from the `${HADOOP_PREFIX}/logs` directory are tailed so that they can be viewed by attaching to the container.
+Logs from the `${HADOOP_HOME}/logs` directory are tailed so that they can be viewed by attaching to the container.
 
 ### `hdfs-nn` - HDFS Name Node
 
